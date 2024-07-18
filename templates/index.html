@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    <nav class="navbar">
+        <ul>
+            <li>
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <a href="/contato">Contato</a>
+            </li>
+            <li>
+                <a href="/mercado">Mercado</a>
+            </li>
+            <li>
+                <a href="/produtos">Produtos</a>
+            </li>
+        </ul>
+    </nav>
+
+    <h1>
+        Home - Django
+    </h1>
+
+    <hr>
+
+    <h2>{{courses}}</h2>
+
+    <hr>
+
+    <h2>
+        Linguagens de Programação
+    </h2>
+
+
+    <ul>
+        {% for language in languages %}
+        <li>
+            {{language}}
+        </li>
+        {% endfor %}
+    </ul>
+    
+    <hr>
+
+    <h2>Notícias</h2>
+
+    <hr>
+
+    <div class="abanoticia">
+        {% for new in news %}
+        <div class="noticia">
+            <h3>
+                {{new.title}}
+            </h3>
+    
+            <h4>
+                {{new.subtitle}}
+            </h4>
+    
+            <p>
+                {{new.text}}
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <hr>
+    
+    <div class="divpbooks">
+        {% for book in books %}
+        <p>{{book}}</p>
+        {% endfor %}
+    </div>
+
+    <div class="divbotao">
+        <button class="botaojs" onclick="f_teste()"> Função JS </button>
+    </div>
+
+    <footer>
+        <p>
+            gays anônimos
+        </p>
+        <p>
+            13076-060 / Rua Dom Bosco - Taquaral / Campinas - SP
+        </p>
+        <p>
+            (12)99321-5476
+        </p>
+    </footer>
+
+</body>
+
+<script type="text/javascript" src="{% static 'js/scripts.js' %}"></script>
+
+</html>
