@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% include 'inc/header.html' %}
+</head>
+<body>
+
+
+    <h1>
+        Mercado - Django
+    </h1>
+
+    <hr>
+
+    <h2>{{courses}}</h2>
+
+    <hr>
+
+    <h2>
+        Linguagens de Programação
+    </h2>
+
+
+    <ul>
+        {% for language in languages %}
+        <li>
+            {{language}}
+        </li>
+        {% endfor %}
+    </ul>
+    
+    <hr>
+
+    <h2>Notícias</h2>
+
+    <hr>
+
+    {% for new in news %}
+    <div class="notícia">
+        <h3>
+            {{new.title}}
+        </h3>
+
+        <h4>
+            {{new.subtitle}}
+        </h4>
+
+        <p>
+            {{new.text}}
+        </p>
+        <hr>
+    </div>
+    {% endfor %}
+</body>
+
+{% include 'inc/footer.html' %}
+
+</html>

@@ -4,27 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>{{title|default:'title'}}</title>
+    {% include 'inc/header.html' %}
 </head>
 <body>
-
-    <nav class="navbar">
-        <ul>
-            <li>
-                <a href="/">Home</a>
-            </li>
-            <li>
-                <a href="/contato">Contato</a>
-            </li>
-            <li>
-                <a href="/mercado">Mercado</a>
-            </li>
-            <li>
-                <a href="/produtos">Produtos</a>
-            </li>
-        </ul>
-    </nav>
 
     <h1>
         Contato - Django
@@ -44,4 +27,7 @@
 
     
 </body>
+
+{% include 'inc/footer.html' %}
+
 </html>

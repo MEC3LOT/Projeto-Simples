@@ -5,87 +5,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% include 'inc/header.html' %}
 </head>
 <body>
-
-    <nav class="navbar">
-        <ul>
-            <li>
-                <a href="/">Home</a>
-            </li>
-            <li>
-                <a href="/contato">Contato</a>
-            </li>
-            <li>
-                <a href="/mercado">Mercado</a>
-            </li>
-            <li>
-                <a href="/produtos">Produtos</a>
-            </li>
-        </ul>
-    </nav>
 
     <h1>
         Produtos - Django
     </h1>
 
-    <p>
-        {{ produto }}
-    </p>
     <hr>
-    {% for p in produto %}
-   	<p>
-		{{ p }}
-	</p>
-    {% endfor %}
+
+    <div style="display: flex;flex-direction: column;margin: 0 2vw;">
+        <p>
+            {{ produto }}
+        </p>
+
+        <hr style="width: 100%;">
+        
+        {% for p in product %}
+        
+             <p>
+                <a href="{% url 'produto_single' p.id %}">{{ p }}</a>
+            </p>
+    
+        {% endfor %}
+    </div>
 
 
 </body>
+
+{% include 'inc/footer.html' %}
+
 </html>
 
-<!-- 
-{% load static %}
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-
-    <nav class="navbar">
-        <ul>
-            <li>
-                <a href="/">Home</a>
-            </li>
-            <li>
-                <a href="/contato">Contato</a>
-            </li>
-            <li>
-                <a href="/mercado">Mercado</a>
-            </li>
-            <li>
-                <a href="/produtos">Produtos</a>
-            </li>
-        </ul>
-    </nav>
-
-    <h2>
-        Python - Produtos
-    </h2>
-    <p>
-        {{ produto }}
-    </p>
-    <hr>
-    {% for p in produto %}
-   	<p>
-		{{ p }}
-	</p>
-    {% endfor %}
-</body>
-
-</html> -->

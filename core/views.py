@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from core.models import Products
 
 # Create your views here.
@@ -8,6 +8,7 @@ def index (request):
         'courses' : 'Programação de Computadores no Senac Guaratinguetá',
         'languages' : ['Python','Java','C++', 'JavaScript' ],
         'books' : ['Livro 1','Livro 2','Livro 3', 'Livro 4' ],
+        'title': 'Web Django',
         'news': [
             {
                 'title' : 'Nova Versão do Django',
@@ -36,10 +37,13 @@ def index (request):
 
 
 def contato (request):
-    return render(request, 'contato.html')
+    context ={
+        'title': 'Contato Site'
+    }
+    return render(request, 'contato.html',)
 
 
-def mercado (request):
+def blogs (request):
     context = {
         'produtos': [
             {
@@ -65,12 +69,18 @@ def mercado (request):
         ]   
     }
 
-    return render(request, 'mercado.html', context)
+    return render(request, 'blogs.html', context)
 
-def produto (request):
-    product = Products.objects.all()
+def produtos(request):
+    product = Products.objects.all() # Products.objects.all() -> Usado para recuperar todos os objetos de um modelo (Dados de uma tabela).
 
     data = {
-        'produto': product,
+        'product': product,
     }
     return render(request, 'produtos.html', data)
+
+
+
+def produto_single(request, id):
+    products = get_object_or_404(Products, id=id) # get_object_or_404(Products, id=id) -> Usado para recuperar um único objeto com base em um critério específico, como um ID único.
+    return render(request, 'produto_single.html', {'products': products})  
