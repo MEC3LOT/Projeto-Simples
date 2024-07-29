@@ -112,3 +112,73 @@ class Blog(models.Model):
     class Meta:
         verbose_name = "Blog"
         verbose_name_plural = "Blogs"
+
+
+
+
+
+
+
+class Brand(models.Model):
+    brand_name = models.CharField('Marca do Veículo', unique=True, max_length=225)
+    slug = models.SlugField(unique=True, blank=True, max_length=255)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.brand_name)
+        super().save(*args, **kwargs)
+    
+
+    # def save(self, *args, **kwargs):
+    #     if not self.slug:
+    #         base_slug = slugify(self.cat_name)
+    #         text_slug = base_slug
+    #         counter = 1
+    #         while Category.objects.filter(slug=text_slug).exists():
+    #             text_slug = f"{base_slug}-{counter}"
+    #             counter += 1
+    #         self.slug = text_slug
+    #     super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.brand_name
+    
+    
+    class Meta:
+        verbose_name = "Marca"
+
+
+class Cars (models.Model):
+    car_name = models.CharField('Nome do Carro', unique=True, max_length=100)
+    car_price = models.DecimalField('Preço', decimal_places=2, max_digits=10)
+    observation = models.TextField('Observação', null=True)
+    marca = models.ForeignKey(Brand, on_delete=models.CASCADE, null=True)
+    car_image = models.ImageField(upload_to='images/cars', null=True, blank=True) 
+
+    slug = models.SlugField(unique=True, blank=True, max_length=255)
+
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.car_name)
+        super().save(*args, **kwargs)
+
+    #A função abaixo é para retornar o name do produto na exibição dentro do painel admin
+    def __str__(self):
+        return self.car_name
+    
+        #mini_image para retornar a imagem em miniatura no painel admin
+    def mini_image(self):
+        if self.car_image:
+            return format_html('<img src="{}" style="height: 100px; width: auto; border-radius:15px;" />', self.car_image.url)
+        return " "
+    mini_image.short_description = 'Imagem de Capa'
+
+    class Meta:
+        verbose_name = "Carro"
+        verbose_name_plural = "Carros"
+
+    # Outra opção de exibição, está comentado abaixo 
+   
+    # def __str__(self):
+    #     return f"{self.name} - R$ {self.price:.2f}"
